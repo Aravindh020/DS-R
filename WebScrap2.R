@@ -1,0 +1,12 @@
+library(rvest)
+library(robotstxt)
+library(dplyr)
+path<-paths_allowed("https://www.theguardian.com/news/datablog/2013/apr/19/twitter-music-app-100-most-followed-musicians")
+link<-"https://www.theguardian.com/news/datablog/2013/apr/19/twitter-music-app-100-most-followed-musicians"
+web<-read_html(link)
+Rank<-web%>%html_nodes(".table-cell-12222--1-1")%>%html_text()
+Name<-web%>%html_nodes(".table-cell-12222--1-2")%>%html_text()
+Country<-web%>%html_nodes(".table-cell-12222--1-4")%>%html_text()
+Followers<-web%>%html_nodes("table-cell-12222--1-5")%>%html_text()
+Music<-data.frame(Rank,Name,Country,Followers) 
+View(Music)
